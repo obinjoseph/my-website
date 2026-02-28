@@ -186,7 +186,7 @@ button {
 
 .navbar.scrolled {
   top: 0;
-  background: rgba(10, 10, 11, 0.85);
+  background: rgba(10, 10, 11, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
@@ -569,9 +569,9 @@ button {
 /* ============================================================
    About Section
    ============================================================ */
-about {
+.about {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.4);
+  background: transparent;
   position: relative;
 }
 
@@ -615,14 +615,14 @@ about {
   align-items: center;
   gap: 18px;
   padding: 20px 24px;
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.75);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: all var(--transition);
 }
 
 .detail-card:hover {
-  background: var(--bg-card-hover);
+  background: rgba(40, 40, 48, 0.85);
   border-color: var(--border-light);
   transform: translateX(6px);
 }
@@ -688,7 +688,7 @@ about {
    ============================================================ */
 .tech {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.3);
+  background: transparent;
   position: relative;
 }
 
@@ -734,7 +734,7 @@ about {
   align-items: center;
   gap: 12px;
   padding: 24px 16px;
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.75);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: all var(--transition);
@@ -742,7 +742,7 @@ about {
 }
 
 .tech-card:hover {
-  background: var(--bg-card-hover);
+  background: rgba(40, 40, 48, 0.85);
   border-color: var(--accent);
   transform: translateY(-4px);
   box-shadow: var(--shadow-glow);
@@ -770,10 +770,10 @@ about {
 }
 
 .tech-img-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  border-radius: 6px;
 }
 
 /* ============================================================
@@ -781,7 +781,7 @@ about {
    ============================================================ */
 .certifications {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.4);
+  background: transparent;
   position: relative;
 }
 
@@ -806,7 +806,7 @@ about {
   align-items: center;
   gap: 20px;
   padding: 24px 28px;
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.75);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: all var(--transition);
@@ -815,7 +815,7 @@ about {
 }
 
 .cert-card:hover {
-  background: var(--bg-card-hover);
+  background: rgba(40, 40, 48, 0.85);
   border-color: var(--accent);
   transform: translateX(6px);
   box-shadow: var(--shadow-glow);
@@ -838,7 +838,6 @@ about {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .cert-aws-icon {
@@ -891,7 +890,7 @@ about {
    ============================================================ */
 .contact {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.3);
+  background: transparent;
   position: relative;
 }
 
@@ -935,7 +934,7 @@ about {
   padding: 12px 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.75);
 }
 
 .contact-link:hover {
@@ -970,7 +969,7 @@ about {
   font-size: 0.95rem;
   font-family: var(--font-primary);
   color: var(--text-primary);
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.75);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   outline: none;
@@ -987,7 +986,7 @@ about {
 .form-group textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-glow);
-  background: var(--bg-card-hover);
+  background: rgba(40, 40, 48, 0.85);
 }
 
 /* ============================================================
@@ -996,7 +995,7 @@ about {
 .footer {
   padding: 40px 0;
   border-top: 1px solid var(--border);
-  background: rgba(10, 10, 11, 0.5);
+  background: rgba(10, 10, 11, 0.4);
 }
 
 .footer-content {
@@ -1058,7 +1057,7 @@ about {
   align-items: center;
   gap: 12px;
   padding: 16px 28px;
-  background: var(--bg-card);
+  background: rgba(30, 30, 35, 0.9);
   border: 1px solid rgba(34, 197, 94, 0.3);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
