@@ -3,7 +3,7 @@
    ============================================================ */
 
 /* ----------------------------------------------------------
-   Animated Background (from sample)
+   Animated Background
    ---------------------------------------------------------- */
 function Star(id, x, y) {
   this.id = id;
@@ -151,6 +151,15 @@ function animateBackground() {
 
 function drawIfMouseMoving() {
   if (!mouseMoving) return;
+
+  // Reset dots array if all dots have died (sparse array with no live entries)
+  var hasDots = false;
+  for (var k in dots) {
+    if (dots[k]) { hasDots = true; break; }
+  }
+  if (!hasDots) {
+    dots = [];
+  }
 
   if (dots.length === 0) {
     dots[0] = new Dot(0, mouseX, mouseY);
