@@ -569,10 +569,9 @@ button {
 /* ============================================================
    About Section
    ============================================================ */
-.about {
+about {
   padding: 120px 0;
-  background: rgba(17, 17, 19, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 11, 0.4);
   position: relative;
 }
 
@@ -689,8 +688,7 @@ button {
    ============================================================ */
 .tech {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 11, 0.3);
   position: relative;
 }
 
@@ -783,8 +781,7 @@ button {
    ============================================================ */
 .certifications {
   padding: 120px 0;
-  background: rgba(17, 17, 19, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 11, 0.4);
   position: relative;
 }
 
@@ -894,8 +891,7 @@ button {
    ============================================================ */
 .contact {
   padding: 120px 0;
-  background: rgba(10, 10, 11, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 11, 0.3);
   position: relative;
 }
 
@@ -1000,7 +996,7 @@ button {
 .footer {
   padding: 40px 0;
   border-top: 1px solid var(--border);
-  background: rgba(10, 10, 11, 0.95);
+  background: rgba(10, 10, 11, 0.5);
 }
 
 .footer-content {
