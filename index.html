@@ -8,8 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
 </head>
 <body>
+  <!-- Starfield Canvas -->
+  <canvas id="starfield"></canvas>
+
   <!-- Under Construction Banner -->
   <div class="construction-banner" id="constructionBanner">
     <div class="construction-inner">
@@ -26,6 +30,8 @@
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#tech">Tech Stack</a></li>
+        <li><a href="#certifications">Certifications</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -39,6 +45,8 @@
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#tech">Tech Stack</a></li>
+      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -108,17 +116,17 @@
         </div>
         <div class="about-details reveal">
           <div class="detail-card">
-            <div class="detail-icon">💼</div>
+            <div class="detail-icon">⏳</div>
             <div class="detail-info">
-              <span class="detail-label">Current Role</span>
-              <span class="detail-value">Data Engineer</span>
+              <span class="detail-label">Experience</span>
+              <span class="detail-value"><span id="yearsExperience"></span>+ Years</span>
             </div>
           </div>
           <div class="detail-card">
-            <div class="detail-icon">🏢</div>
+            <div class="detail-icon">🧠</div>
             <div class="detail-info">
-              <span class="detail-label">Company</span>
-              <span class="detail-value">Tombola</span>
+              <span class="detail-label">DISC Profile</span>
+              <span class="detail-value disc-badge">CS</span>
             </div>
           </div>
           <div class="detail-card">
@@ -129,15 +137,219 @@
             </div>
           </div>
           <div class="detail-card">
-            <div class="detail-icon">🔗</div>
+            <div class="detail-icon">🏢</div>
             <div class="detail-info">
-              <span class="detail-label">LinkedIn</span>
-              <a href="https://www.linkedin.com/in/obinjoseph/" target="_blank" rel="noopener noreferrer" class="detail-link">
-                /in/obinjoseph
-              </a>
+              <span class="detail-label">Company</span>
+              <span class="detail-value">Tombola</span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="tech" id="tech">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Tech & Tools</span>
+        <h2 class="section-title">Technologies I work with<span class="dot">.</span></h2>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Languages</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="devicon-python-plain colored"></i>
+            <span>Python</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-apachespark-original colored"></i>
+            <span>PySpark</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-azuresqldatabase-plain colored"></i>
+            <span>SQL</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-bash-plain colored"></i>
+            <span>Shell</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Databases</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="devicon-microsoftsqlserver-plain colored"></i>
+            <span>SQL Server</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-mysql-plain colored"></i>
+            <span>MySQL</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-postgresql-plain colored"></i>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-mongodb-plain colored"></i>
+            <span>MongoDB</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-dynamodb-plain colored"></i>
+            <span>DynamoDB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Infrastructure & DevOps</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="devicon-apacheairflow-plain colored"></i>
+            <span>Airflow</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-amazonwebservices-plain-wordmark colored"></i>
+            <span>AWS</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-docker-plain colored"></i>
+            <span>Docker</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-kubernetes-plain colored"></i>
+            <span>Kubernetes</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-github-original colored"></i>
+            <span>GitHub</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-bitbucket-original colored"></i>
+            <span>Bitbucket</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Data & Analytics</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <svg class="tech-custom-icon" viewBox="0 0 24 24" fill="currentColor" width="36" height="36"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span>Starburst</span>
+          </div>
+          <div class="tech-card">
+            <svg class="tech-custom-icon" viewBox="0 0 24 24" fill="currentColor" width="36" height="36"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z"/></svg>
+            <span>Bloomreach</span>
+          </div>
+          <div class="tech-card">
+            <img src="https://raw.githubusercontent.com/dbt-labs/dbt-core/main/etc/dbt-core.svg" alt="DBT" class="tech-img-icon" />
+            <span>DBT Core</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Frameworks & APIs</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="devicon-flask-original colored"></i>
+            <span>Flask</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-fastapi-plain colored"></i>
+            <span>FastAPI</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-graphql-plain colored"></i>
+            <span>GraphQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category reveal">
+        <h3 class="tech-category-title">Design & Productivity</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="devicon-figma-plain colored"></i>
+            <span>Figma</span>
+          </div>
+          <div class="tech-card">
+            <i class="devicon-notion-plain colored"></i>
+            <span>Notion</span>
+          </div>
+          <div class="tech-card">
+            <svg class="tech-custom-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="16.5" r="1.5" fill="currentColor"/></svg>
+            <span>Draw.io</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section class="certifications" id="certifications">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Certifications</span>
+        <h2 class="section-title">Professional credentials<span class="dot">.</span></h2>
+      </div>
+      <div class="cert-grid">
+        <a href="https://credentials.databricks.com/cb6a3e01-b900-4170-bb59-c4f336ac434f#gs.4czdc7" target="_blank" rel="noopener noreferrer" class="cert-card reveal">
+          <div class="cert-icon">
+            <img src="https://www.databricks.com/wp-content/uploads/2022/06/db-nav-logo.svg" alt="Databricks" class="cert-logo" />
+          </div>
+          <div class="cert-info">
+            <h4 class="cert-title">Databricks Certified Associate Developer for Apache Spark 3.0</h4>
+            <span class="cert-issuer">Databricks</span>
+          </div>
+          <div class="cert-verify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Verify</span>
+          </div>
+        </a>
+        <a href="https://www.credly.com/badges/3b37df57-48da-4bc9-a047-87f4a11aecf6/linked_in_profile" target="_blank" rel="noopener noreferrer" class="cert-card reveal">
+          <div class="cert-icon">
+            <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
+          </div>
+          <div class="cert-info">
+            <h4 class="cert-title">AWS Certified Cloud Practitioner</h4>
+            <span class="cert-issuer">Amazon Web Services</span>
+          </div>
+          <div class="cert-verify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Verify</span>
+          </div>
+        </a>
+        <a href="https://www.credly.com/badges/a1e40363-c2fb-45b3-881c-7e0fae2bbd9c/linked_in_profile" target="_blank" rel="noopener noreferrer" class="cert-card reveal">
+          <div class="cert-icon">
+            <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
+          </div>
+          <div class="cert-info">
+            <h4 class="cert-title">AWS Certified Solutions Architect Associate</h4>
+            <span class="cert-issuer">Amazon Web Services</span>
+          </div>
+          <div class="cert-verify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Verify</span>
+          </div>
+        </a>
+        <a href="https://www.credly.com/badges/25ffb8ca-b0e8-4f13-8b8c-21acc1bd8841" target="_blank" rel="noopener noreferrer" class="cert-card reveal">
+          <div class="cert-icon">
+            <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
+          </div>
+          <div class="cert-info">
+            <h4 class="cert-title">AWS Certified Data Engineer Associate</h4>
+            <span class="cert-issuer">Amazon Web Services</span>
+          </div>
+          <div class="cert-verify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Verify</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
