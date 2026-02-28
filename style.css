@@ -49,12 +49,14 @@ html {
 
 body {
   font-family: var(--font-primary);
-  background: var(--bg-primary);
+  background: linear-gradient(to bottom, #000000 0%, #050515 40%, #0a0a2e 70%, #111133 100%);
+  background-attachment: scroll;
   color: var(--text-primary);
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: default;
 }
 
 a {
@@ -83,9 +85,9 @@ button {
 }
 
 /* ============================================================
-   Starfield Canvas
+   Animated Background (Canvas + Overlays)
    ============================================================ */
-#starfield {
+#canvas {
   position: fixed;
   top: 0;
   left: 0;
@@ -95,7 +97,59 @@ button {
   pointer-events: none;
 }
 
-/* Ensure all content sits above the starfield */
+.filter {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background: #ffffff;
+  animation: colorChange 3s ease-in-out infinite;
+  animation-fill-mode: both;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@keyframes colorChange {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.landscape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url(https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png);
+  background-size: 1000px 250px;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+}
+
+.landscape::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 250px;
+  background-image: url(https://openclipart.org/image/2000px/260551);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top left;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Ensure all content sits above the background */
 .construction-banner,
 .navbar,
 .mobile-menu,
@@ -334,53 +388,6 @@ button {
   position: relative;
   padding: 120px 24px 80px;
   overflow: hidden;
-}
-
-.hero-bg-shapes {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
-}
-
-.shape-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent 70%);
-  top: -10%;
-  right: -10%;
-  animation: float 20s ease-in-out infinite;
-}
-
-.shape-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
-  bottom: 0;
-  left: -5%;
-  animation: float 25s ease-in-out infinite reverse;
-}
-
-.shape-3 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.15), transparent 70%);
-  top: 40%;
-  left: 50%;
-  animation: float 18s ease-in-out infinite 5s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -40px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 .hero-content {
