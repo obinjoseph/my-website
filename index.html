@@ -9,6 +9,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  <link id="favicon" rel="icon" type="image/png" />
+  <script>
+    (function () {
+      var c = document.createElement("canvas");
+      c.width = 64; c.height = 64;
+      var x = c.getContext("2d");
+      // Black rounded background
+      x.fillStyle = "#000000";
+      x.beginPath();
+      x.roundRect(0, 0, 64, 64, 14);
+      x.fill();
+      // Indigo accent dot
+      x.fillStyle = "#6366f1";
+      x.beginPath();
+      x.arc(56, 52, 5, 0, 2 * Math.PI);
+      x.fill();
+      // "OJ" text
+      x.fillStyle = "#ffffff";
+      x.font = "bold 30px 'Space Grotesk', Arial, sans-serif";
+      x.textAlign = "center";
+      x.textBaseline = "middle";
+      x.fillText("OJ", 30, 32);
+      document.getElementById("favicon").href = c.toDataURL("image/png");
+    })();
+  </script>
 </head>
 <body>
   <!-- Animated Background -->
@@ -66,7 +91,7 @@
       <p class="hero-title reveal">Data Engineer</p>
       <p class="hero-subtitle reveal">
         Building robust data pipelines & infrastructure at
-        <strong>Tombola</strong>, Newcastle, UK.
+        <strong>tombola</strong>, Sunderland, UK.
       </p>
       <div class="hero-cta reveal">
         <a href="#contact" class="btn btn-primary">Get in Touch</a>
@@ -96,19 +121,25 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>
-            I'm a <strong>Data Engineer</strong> based in <strong>Newcastle, UK</strong>,
-            currently working at <strong>tombola</strong> — one of the UK's leading online
-            bingo and gaming companies.
+            I'm a Data Engineer located in Newcastle, UK.
+            With over <span id="yearsExperienceInline"></span> years of experience,
+            I've been primarily focused on building large ETL/ELT pipelines and
+            developing data solutions for various clients and industries.
           </p>
           <p>
-            I specialise in designing and building scalable data pipelines, ETL processes,
-            and cloud-based data infrastructure that empower teams to make data-driven
-            decisions with confidence.
+            At the moment, I am employed at <strong>tombola</strong>, one of the leading online
+            Bingo companies in the UK and a part of the <strong>Flutter UKI</strong> group. My
+            everyday job is centered around creating and maintaining data infrastructure that can
+            handle heavy loads without breaking, and this has sparked my interest in the
+            <strong>performance and optimisation</strong> of the data warehouse. While trustworthy
+            flowing of data is essential, what really captivates me is making that happen
+            efficiently at scale.
           </p>
           <p>
-            Whether it's wrangling massive datasets, optimising warehouse performance,
-            or architecting end-to-end data solutions, I'm passionate about turning
-            complexity into clarity.
+            I am the kind of person who likes to get in there and take a <strong>hands-on
+            approach</strong>, whether that means starting something new or performing a bit of
+            cleanup on existing pipelines. For me, it's about constructing things that are
+            <strong>functional and effective</strong> rather than just being good on paper.
           </p>
         </div>
         <div class="about-details reveal">

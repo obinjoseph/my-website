@@ -222,11 +222,13 @@ document.addEventListener("DOMContentLoaded", function () {
      Dynamic Years of Experience
      ---------------------------------------------------------- */
   var yearsEl = document.getElementById("yearsExperience");
-  if (yearsEl) {
+  var yearsElInline = document.getElementById("yearsExperienceInline");
+  if (yearsEl || yearsElInline) {
     var startDate = new Date(2018, 10, 1); // November 2018 (month is 0-indexed)
     var now = new Date();
     var diffYears = Math.floor((now - startDate) / (1000 * 60 * 60 * 24 * 365.25));
-    yearsEl.textContent = diffYears;
+    if (yearsEl) yearsEl.textContent = diffYears;
+    if (yearsElInline) yearsElInline.textContent = diffYears;
   }
 
   /* ----------------------------------------------------------
