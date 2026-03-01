@@ -9,6 +9,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  <link id="favicon" rel="icon" type="image/png" />
+  <script>
+    (function () {
+      var c = document.createElement("canvas");
+      c.width = 64; c.height = 64;
+      var x = c.getContext("2d");
+      // Black rounded background
+      x.fillStyle = "#000000";
+      x.beginPath();
+      x.roundRect(0, 0, 64, 64, 14);
+      x.fill();
+      // Indigo accent dot
+      x.fillStyle = "#6366f1";
+      x.beginPath();
+      x.arc(56, 52, 5, 0, 2 * Math.PI);
+      x.fill();
+      // "OJ" text
+      x.fillStyle = "#ffffff";
+      x.font = "bold 30px 'Space Grotesk', Arial, sans-serif";
+      x.textAlign = "center";
+      x.textBaseline = "middle";
+      x.fillText("OJ", 30, 32);
+      document.getElementById("favicon").href = c.toDataURL("image/png");
+    })();
+  </script>
 </head>
 <body>
   <!-- Animated Background -->
@@ -97,7 +122,7 @@
         <div class="about-text reveal">
           <p>
             I'm a <strong>Data Engineer</strong> based in <strong>Newcastle, UK</strong>,
-            currently working at <strong>tombola</strong> — one of the UK's leading online
+            currently working at <strong>Tombola</strong> — one of the UK's leading online
             bingo and gaming companies.
           </p>
           <p>
@@ -137,7 +162,7 @@
             <div class="detail-icon">🏢</div>
             <div class="detail-info">
               <span class="detail-label">Company</span>
-              <span class="detail-value">tombola</span>
+              <span class="detail-value">Tombola</span>
             </div>
           </div>
         </div>
