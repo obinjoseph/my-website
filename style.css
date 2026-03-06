@@ -95,6 +95,7 @@ button {
   height: 100%;
   z-index: 0;
   pointer-events: none;
+  will-change: transform;
 }
 
 .filter {
@@ -109,6 +110,7 @@ button {
   animation-fill-mode: both;
   mix-blend-mode: overlay;
   pointer-events: none;
+  will-change: opacity;
 }
 
 @keyframes colorChange {
@@ -179,6 +181,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.02em;
   transition: transform var(--transition);
+  will-change: transform;
 }
 
 .construction-banner.hidden {
@@ -1051,6 +1054,7 @@ button {
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .toast.show {
