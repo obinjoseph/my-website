@@ -286,14 +286,21 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateActiveLink() {
     var scrollPos = window.scrollY + 200;
 
+    // Batch all geometric reads first to avoid layout thrashing
+    var sectionData = [];
     sections.forEach(function (section) {
-      var top = section.offsetTop;
-      var height = section.offsetHeight;
-      var id = section.getAttribute("id");
+      sectionData.push({
+        id: section.getAttribute("id"),
+        top: section.offsetTop,
+        height: section.offsetHeight
+      });
+    });
 
-      var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+    // Then do all DOM writes
+    sectionData.forEach(function (data) {
+      var link = document.querySelector('.nav-links a[href="#' + data.id + '"]');
       if (link) {
-        if (scrollPos >= top && scrollPos < top + height) {
+        if (scrollPos >= data.top && scrollPos < data.top + data.height) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");
@@ -302,7 +309,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  window.addEventListener("scroll", updateActiveLink);
+  var scrollTicking = false;
+  window.addEventListener("scroll", function () {
+    if (!scrollTicking) {
+      requestAnimationFrame(function () {
+        updateActiveLink();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  });
   updateActiveLink();
 
   /* ----------------------------------------------------------
@@ -312,11 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var revealObserver = new IntersectionObserver(
     function (entries) {
-      entries.forEach(function (entry, index) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          setTimeout(function () {
-            entry.target.classList.add("visible");
-          }, index * 100);
+          entry.target.classList.add("visible");
           revealObserver.unobserve(entry.target);
         }
       });
