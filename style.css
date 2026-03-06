@@ -1206,9 +1206,7 @@ button {
    ============================================================ */
 @font-face {
   font-family: 'devicon';
-  src: url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff') format('woff'),
-       url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.ttf') format('truetype');
+  src: url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
