@@ -7,10 +7,75 @@
   <title>Obin Joseph — Data Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://openclipart.org" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  <link rel="preload" href="https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png" as="image" fetchpriority="high" />
+  <link rel="preload" href="https://openclipart.org/image/2000px/260551" as="image" />
+
+  <!-- Critical above-the-fold CSS inlined to eliminate render-blocking -->
+  <style>
+    :root{--bg-primary:#0a0a0b;--bg-secondary:#111113;--bg-card:#18181b;--bg-card-hover:#1f1f23;--text-primary:#fafafa;--text-secondary:#a1a1aa;--text-muted:#71717a;--accent:#6366f1;--accent-hover:#818cf8;--accent-glow:rgba(99,102,241,.15);--gradient-1:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a78bfa 100%);--gradient-2:linear-gradient(135deg,#6366f1 0%,#06b6d4 100%);--border:#27272a;--border-light:#3f3f46;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;--shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4);--shadow-lg:0 8px 30px rgba(0,0,0,.5);--shadow-glow:0 0 40px rgba(99,102,241,.15);--font-primary:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-display:'Space Grotesk','Inter',sans-serif;--transition:0.3s cubic-bezier(.4,0,.2,1);--transition-slow:0.6s cubic-bezier(.4,0,.2,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:80px;font-size:16px}
+    body{font-family:var(--font-primary);background:linear-gradient(to bottom,#000 0%,#050515 40%,#0a0a2e 70%,#111133 100%);background-attachment:scroll;color:var(--text-primary);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:default}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{cursor:pointer;font-family:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    .dot{color:var(--accent)}
+    #canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;will-change:transform}
+    .filter{width:100%;height:100%;position:fixed;top:0;left:0;z-index:0;background:#fff;animation:colorChange 3s ease-in-out infinite;animation-fill-mode:both;mix-blend-mode:overlay;pointer-events:none;will-change:opacity}
+    @keyframes colorChange{0%,100%{opacity:0}50%{opacity:.3}}
+    .landscape{position:fixed;bottom:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:url(https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png);background-size:1000px 250px;background-repeat:repeat-x;background-position:center bottom}
+    .landscape::before{content:'';position:fixed;top:0;left:0;width:400px;height:250px;background-image:url(https://openclipart.org/image/2000px/260551);background-size:contain;background-repeat:no-repeat;background-position:top left;opacity:1;pointer-events:none}
+    .construction-banner,.navbar,.mobile-menu,.hero,.about,.tech,.certifications,.contact,.footer,.toast{position:relative;z-index:1}
+    .construction-banner{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--gradient-1);color:#fff;font-size:.85rem;font-weight:500;letter-spacing:.02em;transition:transform var(--transition);will-change:transform}
+    .construction-banner.hidden{transform:translateY(-100%)}
+    .construction-inner{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 20px;max-width:1200px;margin:0 auto}
+    .construction-icon{font-size:1rem;animation:wiggle 2s ease-in-out infinite}
+    @keyframes wiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+    .construction-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:24px;height:24px;border-radius:50%;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background var(--transition);flex-shrink:0}
+    .navbar{position:fixed;top:42px;left:0;right:0;z-index:900;padding:0 24px;transition:all var(--transition)}
+    .navbar.scrolled{top:0;background:rgba(10,10,11,.7);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+    .navbar.banner-hidden{top:0}
+    .nav-container{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
+    .nav-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;transition:opacity var(--transition)}
+    .nav-links{list-style:none;display:flex;gap:36px}
+    .nav-links a{font-size:.9rem;font-weight:500;color:var(--text-secondary);transition:color var(--transition);position:relative}
+    .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+    .nav-toggle span{width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:all var(--transition)}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:850;background:rgba(10,10,11,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);align-items:center;justify-content:center}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:120px 24px 80px;overflow:hidden}
+    .hero-content{max-width:720px;text-align:center;position:relative;z-index:1}
+    .hero-greeting{display:inline-flex;align-items:center;gap:12px;font-size:.95rem;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+    .greeting-line{width:40px;height:2px;background:var(--accent);border-radius:1px}
+    .hero-name{font-family:var(--font-display);font-size:clamp(3.5rem,10vw,7rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:20px;background:linear-gradient(135deg,#fff 0%,#a1a1aa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-title{font-family:var(--font-display);font-size:clamp(1.2rem,3vw,1.6rem);font-weight:600;color:var(--accent);margin-bottom:16px;letter-spacing:.02em}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-secondary);max-width:500px;margin:0 auto 40px;line-height:1.8}
+    .hero-subtitle strong{color:var(--text-primary);font-weight:600}
+    .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:.95rem;font-weight:600;border-radius:var(--radius-xl);border:none;transition:all var(--transition);letter-spacing:.01em}
+    .btn-primary{background:var(--gradient-1);color:#fff;box-shadow:var(--shadow-glow)}
+    .btn-outline{background:transparent;color:var(--text-primary);border:1.5px solid var(--border-light)}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+  </style>
+
+  <!-- Full stylesheet loaded non-blocking (below-fold styles) -->
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="style.css" /></noscript>
+
+  <!-- Devicon loaded non-blocking (only used in tech section, below the fold) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" /></noscript>
+  <!-- Preload Devicon font file to reduce delay; crossorigin required for cross-origin font preloads -->
+  <link rel="preload"
+        href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin="anonymous" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link id="favicon" rel="icon" type="image/png" />
   <script>
@@ -338,7 +403,7 @@
             <img src="https://www.databricks.com/wp-content/uploads/2022/06/db-nav-logo.svg" alt="Databricks" class="cert-logo" />
           </div>
           <div class="cert-info">
-            <h4 class="cert-title">Databricks Certified Associate Developer for Apache Spark 3.0</h4>
+            <h3 class="cert-title">Databricks Certified Associate Developer for Apache Spark 3.0</h3>
             <span class="cert-issuer">Databricks</span>
           </div>
           <div class="cert-verify">
@@ -351,7 +416,7 @@
             <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
           </div>
           <div class="cert-info">
-            <h4 class="cert-title">AWS Certified Cloud Practitioner</h4>
+            <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
@@ -364,7 +429,7 @@
             <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
           </div>
           <div class="cert-info">
-            <h4 class="cert-title">AWS Certified Solutions Architect Associate</h4>
+            <h3 class="cert-title">AWS Certified Solutions Architect Associate</h3>
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
@@ -377,7 +442,7 @@
             <i class="devicon-amazonwebservices-plain-wordmark colored cert-aws-icon"></i>
           </div>
           <div class="cert-info">
-            <h4 class="cert-title">AWS Certified Data Engineer Associate</h4>
+            <h3 class="cert-title">AWS Certified Data Engineer Associate</h3>
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
