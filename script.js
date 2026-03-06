@@ -16,7 +16,6 @@ function Star(id, x, y) {
 
 Star.prototype.draw = function () {
   ctx.fillStyle = this.color;
-  ctx.shadowBlur = this.r * 2;
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
   ctx.closePath();
@@ -45,7 +44,6 @@ function Dot(id, x, y) {
 
 Dot.prototype.draw = function () {
   ctx.fillStyle = this.color;
-  ctx.shadowBlur = this.r * 2;
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
   ctx.closePath();
@@ -83,6 +81,7 @@ Dot.prototype.move = function () {
 };
 
 Dot.prototype.die = function () {
+  activeDotCount--;
   dots[this.id] = null;
   delete dots[this.id];
 };
@@ -93,8 +92,9 @@ function getPreviousDot(id, stepback) {
   return false;
 }
 
+var DEG_TO_RAD = Math.PI / 180;
 function degToRad(deg) {
-  return deg * (Math.PI / 180);
+  return deg * DEG_TO_RAD;
 }
 
 var canvas = document.getElementById("canvas"),
@@ -108,6 +108,7 @@ var canvas = document.getElementById("canvas"),
   stars = [],
   initStarsPopulation = 1000,
   dots = [],
+  activeDotCount = 0,
   dotsMinDist = 1,
   bgParams = {
     maxDistFromCursor: 100,
@@ -120,11 +121,11 @@ function setCanvasSize() {
   HEIGHT = document.documentElement.clientHeight;
   canvas.setAttribute("width", WIDTH);
   canvas.setAttribute("height", HEIGHT);
+  initStarsPopulation = WIDTH < 768 ? 400 : 1000;
 }
 
 function initBackground() {
   ctx.strokeStyle = "white";
-  ctx.shadowColor = "white";
   for (var i = 0; i < initStarsPopulation; i++) {
     stars[i] = new Star(
       i,
@@ -132,18 +133,17 @@ function initBackground() {
       Math.floor(Math.random() * HEIGHT)
     );
   }
-  ctx.shadowBlur = 0;
   animateBackground();
 }
 
 function animateBackground() {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
-  for (var i in stars) {
+  for (var i = 0, len = stars.length; i < len; i++) {
     stars[i].move();
   }
-  for (var i in dots) {
-    dots[i].move();
+  for (var i = 0, len = dots.length; i < len; i++) {
+    if (dots[i]) dots[i].move();
   }
   drawIfMouseMoving();
   requestAnimationFrame(animateBackground);
@@ -152,18 +152,11 @@ function animateBackground() {
 function drawIfMouseMoving() {
   if (!mouseMoving) return;
 
-  // Reset dots array if all dots have died (sparse array with no live entries)
-  var hasDots = false;
-  for (var k in dots) {
-    if (dots[k]) { hasDots = true; break; }
-  }
-  if (!hasDots) {
+  if (activeDotCount === 0) {
     dots = [];
-  }
-
-  if (dots.length === 0) {
     dots[0] = new Dot(0, mouseX, mouseY);
     dots[0].draw();
+    activeDotCount = 1;
     return;
   }
 
@@ -184,31 +177,42 @@ function drawIfMouseMoving() {
   dots[dots.length] = new Dot(dots.length, mouseX + xVariation, mouseY + yVariation);
   dots[dots.length - 1].draw();
   dots[dots.length - 1].link();
+  activeDotCount++;
 }
 
 // Allow mouse interaction on canvas
 canvas.style.pointerEvents = "auto";
 
+var pendingMouseMove = false;
 window.addEventListener("mousemove", function (e) {
-  mouseMoving = true;
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  clearTimeout(mouseMoveChecker);
-  mouseMoveChecker = setTimeout(function () {
-    mouseMoving = false;
-  }, 100);
+  if (pendingMouseMove) return;
+  pendingMouseMove = true;
+  requestAnimationFrame(function () {
+    mouseMoving = true;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    clearTimeout(mouseMoveChecker);
+    mouseMoveChecker = setTimeout(function () {
+      mouseMoving = false;
+    }, 100);
+    pendingMouseMove = false;
+  });
 });
 
+var resizeTimeout;
 window.addEventListener("resize", function () {
-  setCanvasSize();
-  stars = [];
-  for (var i = 0; i < initStarsPopulation; i++) {
-    stars[i] = new Star(
-      i,
-      Math.floor(Math.random() * WIDTH),
-      Math.floor(Math.random() * HEIGHT)
-    );
-  }
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(function () {
+    setCanvasSize();
+    stars = [];
+    for (var i = 0; i < initStarsPopulation; i++) {
+      stars[i] = new Star(
+        i,
+        Math.floor(Math.random() * WIDTH),
+        Math.floor(Math.random() * HEIGHT)
+      );
+    }
+  }, 150);
 });
 
 setCanvasSize();
