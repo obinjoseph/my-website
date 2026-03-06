@@ -1196,3 +1196,20 @@ button {
     padding: 16px;
   }
 }
+
+/* ============================================================
+   Font Display Override — Devicon (jsDelivr CDN)
+   The CDN stylesheet does not set font-display, causing invisible
+   text during font load (PageSpeed: FCP unscored). This @font-face
+   re-declaration overrides it with font-display: swap so fallback
+   text is shown immediately, then swapped once the font loads.
+   ============================================================ */
+@font-face {
+  font-family: 'devicon';
+  src: url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
