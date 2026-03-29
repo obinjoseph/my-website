@@ -16,10 +16,10 @@
 
   <!-- Critical above-the-fold CSS inlined to eliminate render-blocking -->
   <style>
-    :root{--bg-primary:#0a0a0b;--bg-secondary:#111113;--bg-card:#18181b;--bg-card-hover:#1f1f23;--text-primary:#fafafa;--text-secondary:#a1a1aa;--text-muted:#71717a;--accent:#6366f1;--accent-hover:#818cf8;--accent-glow:rgba(99,102,241,.15);--gradient-1:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a78bfa 100%);--gradient-2:linear-gradient(135deg,#6366f1 0%,#06b6d4 100%);--border:#27272a;--border-light:#3f3f46;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;--shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4);--shadow-lg:0 8px 30px rgba(0,0,0,.5);--shadow-glow:0 0 40px rgba(99,102,241,.15);--font-primary:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-display:'Space Grotesk','Inter',sans-serif;--transition:0.3s cubic-bezier(.4,0,.2,1);--transition-slow:0.6s cubic-bezier(.4,0,.2,1)}
+    :root{--bg-primary:#0f172a;--bg-secondary:#1e293b;--bg-card:#1e293b;--bg-card-hover:#334155;--text-primary:#f8fafc;--text-secondary:#94a3b8;--text-muted:#64748b;--accent:#2dd4bf;--accent-hover:#5eead4;--accent-glow:rgba(45,212,191,.15);--gradient-1:linear-gradient(135deg,#0d9488 0%,#14b8a6 50%,#2dd4bf 100%);--gradient-2:linear-gradient(135deg,#14b8a6 0%,#06b6d4 100%);--border:#334155;--border-light:#475569;--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;--shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4);--shadow-lg:0 8px 30px rgba(0,0,0,.5);--shadow-glow:0 0 40px rgba(45,212,191,.15);--font-primary:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-display:'Space Grotesk','Inter',sans-serif;--transition:0.3s cubic-bezier(.4,0,.2,1);--transition-slow:0.6s cubic-bezier(.4,0,.2,1)}
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:80px;font-size:16px}
-    body{font-family:var(--font-primary);background:linear-gradient(to bottom,#000 0%,#050515 40%,#0a0a2e 70%,#111133 100%);background-attachment:scroll;color:var(--text-primary);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:default}
+    body{font-family:var(--font-primary);background:linear-gradient(to bottom,#020617 0%,#0f172a 40%,#134e4a 70%,#1e293b 100%);background-attachment:scroll;color:var(--text-primary);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:default}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     button{cursor:pointer;font-family:inherit}
@@ -38,7 +38,7 @@
     @keyframes wiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
     .construction-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:24px;height:24px;border-radius:50%;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background var(--transition);flex-shrink:0}
     .navbar{position:fixed;top:42px;left:0;right:0;z-index:900;padding:0 24px;transition:all var(--transition)}
-    .navbar.scrolled{top:0;background:rgba(10,10,11,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-bottom:1px solid var(--border)}
+    .navbar.scrolled{top:0;background:rgba(15,23,42,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-bottom:1px solid var(--border)}
     .navbar.banner-hidden{top:0}
     .nav-container{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
     .nav-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;transition:opacity var(--transition)}
@@ -46,7 +46,7 @@
     .nav-links a{font-size:.9rem;font-weight:500;color:var(--text-secondary);transition:color var(--transition);position:relative}
     .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
     .nav-toggle span{width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:all var(--transition)}
-    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:850;background:rgba(10,10,11,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:850;background:rgba(15,23,42,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center}
     .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:120px 24px 80px;overflow:hidden}
     .hero-content{max-width:720px;text-align:center;position:relative;z-index:1}
     .hero-greeting{display:inline-flex;align-items:center;gap:12px;font-size:.95rem;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
@@ -83,13 +83,13 @@
       var c = document.createElement("canvas");
       c.width = 64; c.height = 64;
       var x = c.getContext("2d");
-      // Black rounded background
-      x.fillStyle = "#000000";
+      // Slate rounded background
+      x.fillStyle = "#0f172a";
       x.beginPath();
       x.roundRect(0, 0, 64, 64, 14);
       x.fill();
-      // Indigo accent dot
-      x.fillStyle = "#6366f1";
+      // Teal accent dot
+      x.fillStyle = "#2dd4bf";
       x.beginPath();
       x.arc(56, 52, 5, 0, 2 * Math.PI);
       x.fill();
