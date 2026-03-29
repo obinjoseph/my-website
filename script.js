@@ -2,9 +2,14 @@
    Portfolio — JavaScript
    ============================================================ */
 
+var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /* ----------------------------------------------------------
    Animated Background
    ---------------------------------------------------------- */
+var TWO_PI = 2 * Math.PI;
+var DEG_TO_RAD = Math.PI / 180;
+
 function Star(id, x, y) {
   this.id = id;
   this.x = x;
@@ -17,7 +22,7 @@ function Star(id, x, y) {
 Star.prototype.draw = function () {
   ctx.fillStyle = this.color;
   ctx.beginPath();
-  ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+  ctx.arc(this.x, this.y, this.r, 0, TWO_PI, false);
   ctx.closePath();
   ctx.fill();
 };
@@ -37,15 +42,17 @@ function Dot(id, x, y) {
   this.speed = 0.5;
   this.a = 0.5;
   this.aReduction = 0.005;
-  this.color = "rgba(255,255,255," + this.a + ")";
-  this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
-  this.dir = Math.floor(Math.random() * 140) + 200;
+  this.color = "rgba(255,255,255,0.5)";
+  this.linkColor = "rgba(255,255,255,0.125)";
+  var dirRad = (Math.floor(Math.random() * 140) + 200) * DEG_TO_RAD;
+  this.dx = Math.cos(dirRad);
+  this.dy = Math.sin(dirRad);
 }
 
 Dot.prototype.draw = function () {
   ctx.fillStyle = this.color;
   ctx.beginPath();
-  ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+  ctx.arc(this.x, this.y, this.r, 0, TWO_PI, false);
   ctx.closePath();
   ctx.fill();
 };
@@ -57,13 +64,12 @@ Dot.prototype.link = function () {
   var previousDot3 = getPreviousDot(this.id, 3);
   if (!previousDot1) return;
   ctx.strokeStyle = this.linkColor;
-  ctx.moveTo(previousDot1.x, previousDot1.y);
   ctx.beginPath();
+  ctx.moveTo(previousDot1.x, previousDot1.y);
   ctx.lineTo(this.x, this.y);
   if (previousDot2 !== false) ctx.lineTo(previousDot2.x, previousDot2.y);
   if (previousDot3 !== false) ctx.lineTo(previousDot3.x, previousDot3.y);
   ctx.stroke();
-  ctx.closePath();
 };
 
 Dot.prototype.move = function () {
@@ -73,9 +79,10 @@ Dot.prototype.move = function () {
     return;
   }
   this.color = "rgba(255,255,255," + this.a + ")";
-  this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
-  this.x = this.x + Math.cos(degToRad(this.dir)) * (this.speed + bgParams.dotsSpeed / 100);
-  this.y = this.y + Math.sin(degToRad(this.dir)) * (this.speed + bgParams.dotsSpeed / 100);
+  this.linkColor = "rgba(255,255,255," + (this.a * 0.25) + ")";
+  var spd = this.speed + bgParams.dotsSpeed / 100;
+  this.x += this.dx * spd;
+  this.y += this.dy * spd;
   this.draw();
   this.link();
 };
@@ -83,18 +90,12 @@ Dot.prototype.move = function () {
 Dot.prototype.die = function () {
   activeDotCount--;
   dots[this.id] = null;
-  delete dots[this.id];
 };
 
 function getPreviousDot(id, stepback) {
   if (id === 0 || id - stepback < 0) return false;
-  if (typeof dots[id - stepback] !== "undefined") return dots[id - stepback];
-  return false;
-}
-
-var DEG_TO_RAD = Math.PI / 180;
-function degToRad(deg) {
-  return deg * DEG_TO_RAD;
+  var d = dots[id - stepback];
+  return d != null ? d : false;
 }
 
 var canvas = document.getElementById("canvas"),
@@ -110,6 +111,7 @@ var canvas = document.getElementById("canvas"),
   dots = [],
   activeDotCount = 0,
   dotsMinDist = 1,
+  animationId = null,
   bgParams = {
     maxDistFromCursor: 100,
     dotsSpeed: 0,
@@ -146,7 +148,14 @@ function animateBackground() {
     if (dots[i]) dots[i].move();
   }
   drawIfMouseMoving();
-  requestAnimationFrame(animateBackground);
+  animationId = requestAnimationFrame(animateBackground);
+}
+
+function stopBackground() {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
 }
 
 function drawIfMouseMoving() {
@@ -174,13 +183,13 @@ function drawIfMouseMoving() {
   xVariation = xVariation * Math.floor(Math.random() * bgParams.maxDistFromCursor) + 1;
   var yVariation = Math.random() > 0.5 ? -1 : 1;
   yVariation = yVariation * Math.floor(Math.random() * bgParams.maxDistFromCursor) + 1;
-  dots[dots.length] = new Dot(dots.length, mouseX + xVariation, mouseY + yVariation);
-  dots[dots.length - 1].draw();
-  dots[dots.length - 1].link();
+  var newDot = new Dot(dots.length, mouseX + xVariation, mouseY + yVariation);
+  dots[dots.length] = newDot;
+  newDot.draw();
+  newDot.link();
   activeDotCount++;
 }
 
-// Allow mouse interaction on canvas
 canvas.style.pointerEvents = "auto";
 
 var pendingMouseMove = false;
@@ -197,7 +206,7 @@ window.addEventListener("mousemove", function (e) {
     }, 100);
     pendingMouseMove = false;
   });
-});
+}, { passive: true });
 
 var resizeTimeout;
 window.addEventListener("resize", function () {
@@ -215,8 +224,30 @@ window.addEventListener("resize", function () {
   }, 150);
 });
 
+document.addEventListener("visibilitychange", function () {
+  if (prefersReducedMotion) return;
+  if (document.hidden) {
+    stopBackground();
+  } else if (!animationId) {
+    animateBackground();
+  }
+});
+
 setCanvasSize();
-initBackground();
+if (!prefersReducedMotion) {
+  initBackground();
+} else {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  ctx.strokeStyle = "white";
+  for (var i = 0; i < initStarsPopulation; i++) {
+    stars[i] = new Star(
+      i,
+      Math.floor(Math.random() * WIDTH),
+      Math.floor(Math.random() * HEIGHT)
+    );
+    stars[i].draw();
+  }
+}
 
 /* ----------------------------------------------------------
    Portfolio UI Logic
@@ -253,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", function () {
     var currentScroll = window.scrollY;
     navbar.classList.toggle("scrolled", currentScroll > 50);
-  });
+  }, { passive: true });
 
   /* ----------------------------------------------------------
      Mobile menu toggle
@@ -282,11 +313,16 @@ document.addEventListener("DOMContentLoaded", function () {
      Active nav link on scroll
      ---------------------------------------------------------- */
   var sections = document.querySelectorAll("section[id]");
+  var navLinkMap = {};
+  sections.forEach(function (section) {
+    var id = section.getAttribute("id");
+    var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+    if (link) navLinkMap[id] = link;
+  });
 
   function updateActiveLink() {
     var scrollPos = window.scrollY + 200;
 
-    // Batch all geometric reads first to avoid layout thrashing
     var sectionData = [];
     sections.forEach(function (section) {
       sectionData.push({
@@ -296,9 +332,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Then do all DOM writes
     sectionData.forEach(function (data) {
-      var link = document.querySelector('.nav-links a[href="#' + data.id + '"]');
+      var link = navLinkMap[data.id];
       if (link) {
         if (scrollPos >= data.top && scrollPos < data.top + data.height) {
           link.classList.add("active");
@@ -318,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       scrollTicking = true;
     }
-  });
+  }, { passive: true });
   updateActiveLink();
 
   /* ----------------------------------------------------------
@@ -347,20 +382,23 @@ document.addEventListener("DOMContentLoaded", function () {
      ---------------------------------------------------------- */
   var contactForm = document.getElementById("contactForm");
   var toast = document.getElementById("toast");
+  var submitBtn = contactForm.querySelector('button[type="submit"]');
+
+  var SPINNER_HTML =
+    '<span>Sending...</span>' +
+    '<svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="30 60" /></svg>';
+  var SEND_HTML =
+    '<span>Send Message</span>' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
 
   contactForm.addEventListener("submit", function () {
-    var submitBtn = contactForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.innerHTML =
-      '<span>Sending...</span>' +
-      '<svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="30 60" /></svg>';
+    submitBtn.innerHTML = SPINNER_HTML;
 
     setTimeout(function () {
       contactForm.reset();
       submitBtn.disabled = false;
-      submitBtn.innerHTML =
-        '<span>Send Message</span>' +
-        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+      submitBtn.innerHTML = SEND_HTML;
 
       toast.classList.add("show");
       setTimeout(function () {

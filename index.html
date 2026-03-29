@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://openclipart.org" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" as="style" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="preload" href="https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png" as="image" fetchpriority="high" />
   <link rel="preload" href="https://openclipart.org/image/2000px/260551" as="image" />
 
@@ -38,7 +38,7 @@
     @keyframes wiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
     .construction-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:24px;height:24px;border-radius:50%;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background var(--transition);flex-shrink:0}
     .navbar{position:fixed;top:42px;left:0;right:0;z-index:900;padding:0 24px;transition:all var(--transition)}
-    .navbar.scrolled{top:0;background:rgba(10,10,11,.7);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+    .navbar.scrolled{top:0;background:rgba(10,10,11,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-bottom:1px solid var(--border)}
     .navbar.banner-hidden{top:0}
     .nav-container{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
     .nav-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;transition:opacity var(--transition)}
@@ -46,7 +46,7 @@
     .nav-links a{font-size:.9rem;font-weight:500;color:var(--text-secondary);transition:color var(--transition);position:relative}
     .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
     .nav-toggle span{width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:all var(--transition)}
-    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:850;background:rgba(10,10,11,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);align-items:center;justify-content:center}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:850;background:rgba(10,10,11,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center}
     .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:120px 24px 80px;overflow:hidden}
     .hero-content{max-width:720px;text-align:center;position:relative;z-index:1}
     .hero-greeting{display:inline-flex;align-items:center;gap:12px;font-size:.95rem;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
@@ -104,6 +104,22 @@
   </script>
 </head>
 <body>
+  <!-- SVG Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </symbol>
+    <symbol id="icon-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+    </symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </symbol>
+  </svg>
+
   <!-- Animated Background -->
   <div class="landscape"></div>
   <div class="filter"></div>
@@ -164,9 +180,7 @@
       <div class="hero-cta reveal">
         <a href="#contact" class="btn btn-primary">Get in Touch</a>
         <a href="https://www.linkedin.com/in/obinjoseph/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-          <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
+          <svg class="linkedin-icon" width="18" height="18"><use href="#icon-linkedin"/></svg>
           LinkedIn
         </a>
       </div>
@@ -407,7 +421,7 @@
             <span class="cert-issuer">Databricks</span>
           </div>
           <div class="cert-verify">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="18" height="18"><use href="#icon-external"/></svg>
             <span>Verify</span>
           </div>
         </a>
@@ -420,7 +434,7 @@
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="18" height="18"><use href="#icon-external"/></svg>
             <span>Verify</span>
           </div>
         </a>
@@ -433,7 +447,7 @@
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="18" height="18"><use href="#icon-external"/></svg>
             <span>Verify</span>
           </div>
         </a>
@@ -446,7 +460,7 @@
             <span class="cert-issuer">Amazon Web Services</span>
           </div>
           <div class="cert-verify">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <svg width="18" height="18"><use href="#icon-external"/></svg>
             <span>Verify</span>
           </div>
         </a>
@@ -469,9 +483,7 @@
           </p>
           <div class="contact-links">
             <a href="https://www.linkedin.com/in/obinjoseph/" target="_blank" rel="noopener noreferrer" class="contact-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
+              <svg width="20" height="20"><use href="#icon-linkedin"/></svg>
               LinkedIn Profile
             </a>
           </div>
@@ -495,7 +507,7 @@
           </div>
           <button type="submit" class="btn btn-primary btn-full">
             <span>Send Message</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <svg width="20" height="20"><use href="#icon-send"/></svg>
           </button>
         </form>
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
@@ -511,9 +523,7 @@
         <p>&copy; 2026 Obin Joseph. All rights reserved.</p>
         <div class="footer-links">
           <a href="https://www.linkedin.com/in/obinjoseph/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
+            <svg width="20" height="20"><use href="#icon-linkedin"/></svg>
           </a>
         </div>
       </div>
@@ -523,7 +533,7 @@
   <!-- Toast notification -->
   <div class="toast" id="toast">
     <div class="toast-content">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      <svg width="22" height="22"><use href="#icon-check"/></svg>
       <span>Message sent successfully!</span>
     </div>
   </div>
