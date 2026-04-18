@@ -107,7 +107,7 @@ var canvas = document.getElementById("canvas"),
   mouseX,
   mouseY,
   stars = [],
-  initStarsPopulation = 1000,
+  initStarsPopulation = 700,
   dots = [],
   activeDotCount = 0,
   dotsMinDist = 1,
@@ -123,7 +123,7 @@ function setCanvasSize() {
   HEIGHT = document.documentElement.clientHeight;
   canvas.setAttribute("width", WIDTH);
   canvas.setAttribute("height", HEIGHT);
-  initStarsPopulation = WIDTH < 768 ? 400 : 1000;
+  initStarsPopulation = WIDTH < 768 ? 280 : 700;
 }
 
 function initBackground() {
@@ -267,20 +267,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ----------------------------------------------------------
-     Construction Banner
-     ---------------------------------------------------------- */
-  var banner = document.getElementById("constructionBanner");
-  var closeBanner = document.getElementById("closeBanner");
-  var navbar = document.getElementById("navbar");
-
-  closeBanner.addEventListener("click", function () {
-    banner.classList.add("hidden");
-    navbar.classList.add("banner-hidden");
-  });
-
-  /* ----------------------------------------------------------
      Navbar scroll effect
      ---------------------------------------------------------- */
+  var navbar = document.getElementById("navbar");
   window.addEventListener("scroll", function () {
     var currentScroll = window.scrollY;
     navbar.classList.toggle("scrolled", currentScroll > 50);
@@ -382,7 +371,11 @@ document.addEventListener("DOMContentLoaded", function () {
      ---------------------------------------------------------- */
   var contactForm = document.getElementById("contactForm");
   var toast = document.getElementById("toast");
+  var toastContent = toast.querySelector(".toast-content");
+  var toastMessage = toast.querySelector(".toast-message");
+  var toastIcon = toast.querySelector(".toast-icon");
   var submitBtn = contactForm.querySelector('button[type="submit"]');
+  var hiddenIframe = document.getElementById("hidden_iframe");
 
   var SPINNER_HTML =
     '<span>Sending...</span>' +
@@ -391,19 +384,46 @@ document.addEventListener("DOMContentLoaded", function () {
     '<span>Send Message</span>' +
     '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
 
+  var formSubmitted = false;
+  var submitTimeout;
+
+  function showToast(success) {
+    if (success) {
+      toastContent.classList.remove("error");
+      toastIcon.innerHTML = '<use href="#icon-check"/>';
+      toastMessage.textContent = "Message sent successfully!";
+    } else {
+      toastContent.classList.add("error");
+      toastIcon.innerHTML = '<use href="#icon-external"/>';
+      toastMessage.textContent = "Failed to send. Please reach out via LinkedIn.";
+    }
+    toast.classList.add("show");
+    setTimeout(function () {
+      toast.classList.remove("show");
+    }, 4000);
+  }
+
+  hiddenIframe.addEventListener("load", function () {
+    if (!formSubmitted) return;
+    clearTimeout(submitTimeout);
+    formSubmitted = false;
+    contactForm.reset();
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = SEND_HTML;
+    showToast(true);
+  });
+
   contactForm.addEventListener("submit", function () {
     submitBtn.disabled = true;
     submitBtn.innerHTML = SPINNER_HTML;
+    formSubmitted = true;
 
-    setTimeout(function () {
-      contactForm.reset();
+    submitTimeout = setTimeout(function () {
+      if (!formSubmitted) return;
+      formSubmitted = false;
       submitBtn.disabled = false;
       submitBtn.innerHTML = SEND_HTML;
-
-      toast.classList.add("show");
-      setTimeout(function () {
-        toast.classList.remove("show");
-      }, 4000);
-    }, 1500);
+      showToast(false);
+    }, 5000);
   });
 });
