@@ -23,5 +23,6 @@ This project is a single-page portfolio with the following sections:
 - Sticky navigation with active section highlighting
 - Reveal-on-scroll transitions using `IntersectionObserver`
 - Dynamic calculation of years of experience in the About section
+- Collapsible Tech Stack and Certifications sections with floating in-section toggles
 - Contact form submission through Google Forms with toast feedback
 - Performance-oriented loading for fonts, stylesheet, and icon assets
