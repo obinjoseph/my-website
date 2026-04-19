@@ -367,6 +367,43 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ----------------------------------------------------------
+     Collapsible sections
+     ---------------------------------------------------------- */
+  function setCollapsibleSectionState(section, toggle, content, collapsed) {
+    var sectionLabel = toggle.getAttribute("data-section-label") || "section";
+    var actionLabel = (collapsed ? "Expand " : "Collapse ") + sectionLabel + " section";
+
+    section.classList.toggle("is-collapsed", collapsed);
+    toggle.setAttribute("aria-expanded", String(!collapsed));
+    toggle.setAttribute("aria-label", actionLabel);
+    toggle.title = actionLabel;
+
+    if (collapsed) {
+      content.setAttribute("aria-hidden", "true");
+      content.setAttribute("inert", "");
+    } else {
+      content.removeAttribute("aria-hidden");
+      content.removeAttribute("inert");
+    }
+  }
+
+  document.querySelectorAll("[data-collapsible-toggle]").forEach(function (toggle) {
+    var targetId = toggle.getAttribute("data-target");
+    var content = targetId ? document.getElementById(targetId) : null;
+    var section = toggle.closest("[data-collapsible-section]");
+
+    if (!content || !section) return;
+
+    setCollapsibleSectionState(section, toggle, content, false);
+
+    toggle.addEventListener("click", function () {
+      var collapsed = !section.classList.contains("is-collapsed");
+      setCollapsibleSectionState(section, toggle, content, collapsed);
+      updateActiveLink();
+    });
+  });
+
+  /* ----------------------------------------------------------
      Contact Form → Google Forms
      ---------------------------------------------------------- */
   var contactForm = document.getElementById("contactForm");
