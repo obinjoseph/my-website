@@ -4,7 +4,7 @@ Personal portfolio website for **Obin Joseph**, a Data Engineer based in Newcast
 
 ## Live site
 
-- Primary URL: `https://www.obinjoseph.com/`
+- Primary URL: `https://www.obinjoseph.com`
 
 ## Overview
 

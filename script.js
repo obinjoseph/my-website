@@ -410,16 +410,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var toast = document.getElementById("toast");
   var toastContent = toast.querySelector(".toast-content");
   var toastMessage = toast.querySelector(".toast-message");
-  var toastIcon = toast.querySelector(".toast-icon");
   var submitBtn = contactForm.querySelector('button[type="submit"]');
   var hiddenIframe = document.getElementById("hidden_iframe");
-
-  var SPINNER_HTML =
-    '<span>Sending...</span>' +
-    '<svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="30 60" /></svg>';
-  var SEND_HTML =
-    '<span>Send Message</span>' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
 
   var formSubmitted = false;
   var submitTimeout;
@@ -427,11 +419,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function showToast(success) {
     if (success) {
       toastContent.classList.remove("error");
-      toastIcon.innerHTML = '<use href="#icon-check"/>';
       toastMessage.textContent = "Message sent successfully!";
     } else {
       toastContent.classList.add("error");
-      toastIcon.innerHTML = '<use href="#icon-external"/>';
       toastMessage.textContent = "Failed to send. Please reach out via LinkedIn.";
     }
     toast.classList.add("show");
@@ -446,20 +436,32 @@ document.addEventListener("DOMContentLoaded", function () {
     formSubmitted = false;
     contactForm.reset();
     submitBtn.disabled = false;
-    submitBtn.innerHTML = SEND_HTML;
+    submitBtn.classList.remove("is-sending");
     showToast(true);
   });
 
-  contactForm.addEventListener("submit", function () {
+  contactForm.addEventListener("submit", function (e) {
+    var nameVal = document.getElementById("name").value.trim();
+    var emailVal = document.getElementById("email").value.trim();
+    var subjectVal = document.getElementById("subject").value.trim();
+    var messageVal = document.getElementById("message").value.trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailVal) || nameVal.length > 100 || subjectVal.length > 200 || messageVal.length > 2000) {
+      e.preventDefault();
+      showToast(false);
+      return;
+    }
+
     submitBtn.disabled = true;
-    submitBtn.innerHTML = SPINNER_HTML;
+    submitBtn.classList.add("is-sending");
     formSubmitted = true;
 
     submitTimeout = setTimeout(function () {
       if (!formSubmitted) return;
       formSubmitted = false;
       submitBtn.disabled = false;
-      submitBtn.innerHTML = SEND_HTML;
+      submitBtn.classList.remove("is-sending");
       showToast(false);
     }, 5000);
   });

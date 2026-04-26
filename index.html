@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Obin Joseph - Data Engineer building robust data pipelines &amp; infrastructure. Portfolio showcasing tech stack, certifications, and contact." />
   <title>Obin Joseph — Data Engineer</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; form-action https://docs.google.com; frame-src 'self' https://docs.google.com; object-src 'none'; base-uri 'self';" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -25,8 +27,8 @@
     #canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;will-change:transform;opacity:0}
     .filter{width:100%;height:100%;position:fixed;top:0;left:0;z-index:0;background:#fff;animation:colorChange 3s ease-in-out infinite;animation-fill-mode:both;mix-blend-mode:overlay;pointer-events:none;will-change:opacity}
     @keyframes colorChange{0%,100%{opacity:0}50%{opacity:.3}}
-    .landscape{position:fixed;bottom:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:url(https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png);background-size:1000px 250px;background-repeat:repeat-x;background-position:center bottom}
-    .landscape::before{content:'';position:fixed;top:0;left:0;width:400px;height:250px;background-image:url(https://openclipart.org/image/2000px/260551);background-size:contain;background-repeat:no-repeat;background-position:top left;opacity:1;pointer-events:none}
+    .landscape{position:fixed;bottom:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:url(icons/landscape-trees.png);background-size:1000px 250px;background-repeat:repeat-x;background-position:center bottom}
+    .landscape::before{content:'';position:fixed;top:0;left:0;width:400px;height:250px;background-image:url(icons/landscape-hills.png);background-size:contain;background-repeat:no-repeat;background-position:top left;opacity:1;pointer-events:none}
     .navbar,.mobile-menu,.hero,.about,.tech,.certifications,.contact,.footer,.toast{position:relative;z-index:1}
     .navbar{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 24px;transition:all var(--transition)}
     .navbar.scrolled{top:0;background:rgba(15,23,42,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border-bottom:1px solid var(--border)}
@@ -58,8 +60,8 @@
   <noscript><link rel="stylesheet" href="style.css" /></noscript>
 
   <!-- Devicon loaded non-blocking (only used in tech section, below the fold) -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" /></noscript>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" as="style" integrity="sha384-DjehTlU5SubGD1zUGe78SkwLgw+q2y9DXnmy3EaDbXA9nvFMPW3LP5verNrWr9rW" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" integrity="sha384-DjehTlU5SubGD1zUGe78SkwLgw+q2y9DXnmy3EaDbXA9nvFMPW3LP5verNrWr9rW" crossorigin="anonymous" /></noscript>
   <!-- Preload Devicon font file to reduce delay; crossorigin required for cross-origin font preloads -->
   <link rel="preload"
         href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/fonts/devicon.woff2"
@@ -435,7 +437,7 @@
           <div class="cert-grid">
             <a href="https://credentials.databricks.com/cb6a3e01-b900-4170-bb59-c4f336ac434f#gs.4czdc7" target="_blank" rel="noopener noreferrer" class="cert-card reveal">
               <div class="cert-icon">
-                <img src="https://www.databricks.com/wp-content/uploads/2022/06/db-nav-logo.svg" alt="Databricks" class="cert-logo" />
+                <img src="icons/databricks.svg" alt="Databricks" class="cert-logo" />
               </div>
               <div class="cert-info">
                 <h3 class="cert-title">Databricks Certified Associate Developer for Apache Spark 3.0</h3>
@@ -529,11 +531,13 @@
             <textarea id="message" name="entry.641136614" rows="5" placeholder="Your message..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-full">
-            <span>Send Message</span>
-            <svg width="20" height="20"><use href="#icon-send"/></svg>
+            <span class="btn-label-send">Send Message</span>
+            <span class="btn-label-sending" aria-hidden="true">Sending...</span>
+            <svg class="btn-icon-send" width="20" height="20"><use href="#icon-send"/></svg>
+            <svg class="btn-icon-spinner spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-dasharray="30 60"/></svg>
           </button>
         </form>
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" sandbox="allow-forms"></iframe>
       </div>
     </div>
   </section>
@@ -556,7 +560,8 @@
   <!-- Toast notification -->
   <div class="toast" id="toast">
     <div class="toast-content">
-      <svg class="toast-icon" width="22" height="22"><use href="#icon-check"/></svg>
+      <svg class="toast-icon toast-icon-check" width="22" height="22" aria-hidden="true"><use href="#icon-check"/></svg>
+      <svg class="toast-icon toast-icon-error" width="22" height="22" aria-hidden="true"><use href="#icon-external"/></svg>
       <span class="toast-message">Message sent successfully!</span>
     </div>
   </div>
