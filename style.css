@@ -136,7 +136,7 @@ button {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  background-image: url(https://openclipart.org/image/2400px/svg_to_png/250847/Trees-Landscape-Silhouette.png);
+  background-image: url(icons/landscape-trees.png);
   background-size: 1000px 250px;
   background-repeat: repeat-x;
   background-position: center bottom;
@@ -149,7 +149,7 @@ button {
   left: 0;
   width: 400px;
   height: 250px;
-  background-image: url(https://openclipart.org/image/2000px/260551);
+  background-image: url(icons/landscape-hills.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top left;
@@ -1108,6 +1108,33 @@ button {
 .spinner {
   animation: spin 1s linear infinite;
   flex-shrink: 0;
+}
+
+.btn-label-sending,
+.btn-icon-spinner {
+  display: none;
+}
+
+.btn.is-sending .btn-label-send,
+.btn.is-sending .btn-icon-send {
+  display: none;
+}
+
+.btn.is-sending .btn-label-sending,
+.btn.is-sending .btn-icon-spinner {
+  display: inline-flex;
+}
+
+.toast-icon-error {
+  display: none;
+}
+
+.toast-content.error .toast-icon-check {
+  display: none;
+}
+
+.toast-content.error .toast-icon-error {
+  display: inline-block;
 }
 
 /* ============================================================
