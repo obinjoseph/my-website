@@ -515,6 +515,18 @@ button {
   letter-spacing: -0.02em;
 }
 
+.section-title-emphasis {
+  display: inline-block;
+  color: var(--accent);
+}
+
+.section-description {
+  max-width: 680px;
+  margin-top: 18px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
 .collapsible-section {
   position: relative;
 }
