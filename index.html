@@ -531,7 +531,13 @@
             <label for="message">Message</label>
             <textarea id="message" name="entry.641136614" rows="5" placeholder="Your message..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-full">
+          <div class="form-group form-check">
+            <label class="check-label" for="notRobot">
+              <input type="checkbox" id="notRobot" />
+              I am not a robot
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" disabled>
             <span class="btn-label-send">Send Message</span>
             <span class="btn-label-sending" aria-hidden="true">Sending...</span>
             <svg class="btn-icon-send" width="20" height="20"><use href="#icon-send"/></svg>
