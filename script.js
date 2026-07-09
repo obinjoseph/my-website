@@ -412,9 +412,17 @@ document.addEventListener("DOMContentLoaded", function () {
   var toastMessage = toast.querySelector(".toast-message");
   var submitBtn = contactForm.querySelector('button[type="submit"]');
   var hiddenIframe = document.getElementById("hidden_iframe");
+  var robotCheck = document.getElementById("notRobot");
 
   var formSubmitted = false;
   var submitTimeout;
+
+  function syncSubmitState() {
+    submitBtn.disabled = !robotCheck.checked;
+  }
+
+  robotCheck.addEventListener("change", syncSubmitState);
+  syncSubmitState();
 
   function showToast(success) {
     if (success) {
@@ -435,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function () {
     clearTimeout(submitTimeout);
     formSubmitted = false;
     contactForm.reset();
-    submitBtn.disabled = false;
+    syncSubmitState();
     submitBtn.classList.remove("is-sending");
     showToast(true);
   });
@@ -446,6 +454,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var subjectVal = document.getElementById("subject").value.trim();
     var messageVal = document.getElementById("message").value.trim();
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!robotCheck.checked) {
+      e.preventDefault();
+      return;
+    }
 
     if (!emailRegex.test(emailVal) || nameVal.length > 100 || subjectVal.length > 200 || messageVal.length > 2000) {
       e.preventDefault();
@@ -460,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
     submitTimeout = setTimeout(function () {
       if (!formSubmitted) return;
       formSubmitted = false;
-      submitBtn.disabled = false;
+      syncSubmitState();
       submitBtn.classList.remove("is-sending");
       showToast(false);
     }, 5000);
